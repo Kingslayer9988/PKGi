@@ -134,6 +134,24 @@ int Utility::AppendText(const char* file, const char* line) {
 	return 0;
 }
 
+// Write a file
+int Utility::WriteFile(const char* file, const char* buffer, size_t size) {
+	printf("Writting %s ...", file);
+
+	int fd_dst = sceKernelOpen(file, 0x0002 | 0x0200, 0777);
+
+	if (fd_dst < 0) {
+		printf("Cannot open(write) %s (0x%08x)\n", file, fd_dst);
+		return 1;
+	}
+
+	sceKernelWrite(fd_dst, buffer, size);
+	sceKernelClose(fd_dst);
+
+	printf(" [Done].\n");
+	return 0;
+}
+
 // Remplace text on a file
 int Utility::RemplaceText(const char* file, const char* text, const char* what){
 	printf("Remplace %s ...", file);

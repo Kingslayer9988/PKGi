@@ -19,6 +19,7 @@ class Utility
 		static char* OpenKeyboard(OrbisImeType type, const char* title);
 		static bool  GetFWVersion(char* version);
 		static bool  ByteToHex(char* buf, size_t buf_size, const void* data, size_t data_size);
+		static int   WriteFile(const char* file, const char* buffer, size_t size);
 };
 
 #endif

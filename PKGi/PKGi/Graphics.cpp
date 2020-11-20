@@ -608,7 +608,8 @@ void Graphics::drawTextContainer(char *txt, FT_Face face, int startX, int startY
 int Graphics::loadPNG(Image* img, const char* imagePath) {
 	printf("Loading png ...");
 
-    img->img = (uint32_t*)stbi_load(imagePath, &img->width, &img->height, &img->channels, STBI_rgb_alpha);
+	stbi_set_flip_vertically_on_load(0);
+	img->img = (uint32_t*)stbi_load(imagePath, &img->width, &img->height, &img->channels, STBI_rgb_alpha);
     if (img->img == NULL)
     {
         printf("[ERROR] Failed to load img: %s\n", stbi_failure_reason());
@@ -625,6 +626,7 @@ int Graphics::loadPNG(Image* img, const char* imagePath) {
 int Graphics::loadPNGFromMemory(Image* img, unsigned char* data, int len) {
 	printf("Loading png from memory ...");
 
+	stbi_set_flip_vertically_on_load(0);
 	img->img = (uint32_t*)stbi_load_from_memory((stbi_uc*)data, len, &img->width, &img->height, &img->channels, STBI_rgb_alpha);
 	if (img->img == NULL)
 	{

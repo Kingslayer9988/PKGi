@@ -6,6 +6,7 @@
 #include "Network.h"
 #include "TinyJson.h"
 #include "Utility.h"
+#include "Md5.h"
 
 #include "PackageListView.h"
 #include "CreditView.h"
@@ -169,8 +170,6 @@ void SourcesView::DownloadSourcesInfo() {
 
 			size_t icon_len = 0;
 			unsigned char* icon_data = (unsigned char*)App->Net->GetRequest(icon_url, &icon_len);
-			printf("Data: %p Size: %i\n", icon_data, (int)icon_len);
-
 			if (icon_data) {
 				App->Graph->loadPNGFromMemory(&sources[i].icon, icon_data, (int)icon_len);
 				free(icon_data);
@@ -278,6 +277,15 @@ int SourcesView::Update() {
 			if (App->Ctrl->GetButtonPressed(ORBIS_PAD_BUTTON_DOWN)) {
 				if ((sourceSelected + 1) < sourceNbr) {
 					sourceSelected++;
+				}
+			}
+
+			if (App->Ctrl->GetButtonPressed(ORBIS_PAD_BUTTON_L1)) {
+				if (sources && sourceSelected >= 0) {
+					if (sources[sourceSelected].icon.img != NULL) {
+						uint32_t test = *(uint32_t*)sources[sourceSelected].icon.img;
+						printf("Image buffer (%i): 0x%08x\n", sourceSelected, test);
+					}
 				}
 			}
 

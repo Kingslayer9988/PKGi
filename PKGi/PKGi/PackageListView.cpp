@@ -281,7 +281,7 @@ int PackageListView::Update() {
 					currentPage = 1;
 					totalPage = 0;
 					totalPkgCount = 0;
-					ActualiseList(0);
+					ActualiseList(1);
 				}
 				else {
 					SourcesView* src_view = new SourcesView(App);
@@ -342,7 +342,7 @@ int PackageListView::Update() {
 					free(search);
 
 					// Actualise search
-					ActualiseList(0);
+					ActualiseList(1);
 				}
 			}
 		}

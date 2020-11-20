@@ -113,6 +113,7 @@ void* Network::GetRequest(const char* url, size_t* len) {
 		printf("Network: Download content part by part ...\n");
 
 		reponse = malloc(CHUCK_SIZE);
+		memset(reponse, 0, CHUCK_SIZE);
 
 		lenght = 0;
 		int downloaded_len = -1;
@@ -141,6 +142,8 @@ void* Network::GetRequest(const char* url, size_t* len) {
 	}
 	else {
 		reponse = malloc(lenght);
+		memset(reponse, 0, lenght);
+
 		if (reponse) {
 			sceHttpReadData(req->reqId, reponse, (unsigned int)lenght);
 		}

@@ -4,7 +4,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#define APP_VER 100
+#define APP_VER 101
 
 class Controller;
 class Graphics;
